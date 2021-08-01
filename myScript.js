@@ -11,83 +11,87 @@ const winnerText = document.getElementById("demo");
 const restartButton = document.getElementById("restart");
 let sign = "X";
 const data = [
-    "null",
-    "null",
-    "null",
-    "null",
-    "null",
-    "null",
-    "null",
-    "null",
-    "null",
+  "null",
+  "null",
+  "null",
+  "null",
+  "null",
+  "null",
+  "null",
+  "null",
+  "null",
 ];
 
 const swapSign = () => {
-    if (sign === "X") {
-        return "O";
-    } else {
-        return "X";
-    }
+  if (sign === "X") {
+    return "O";
+  } else {
+    return "X";
+  }
 };
 
 const checkWinner = () => {
-    if (
-        ((data[0] === data[1] && data[1] === data[2]) ||
-            (data[0] === data[3] && data[3] === data[6]) ||
-            (data[0] === data[4] && data[4] === data[8])) &&
-        data[0] !== "null"
-    ) {
-        return true;
-    } else if (
-        (data[1] === data[4] && data[4] === data[7] && data[1] !== "null") ||
-        (data[2] === data[5] && data[5] === data[8] && data[2] !== "null") ||
-        (data[2] === data[4] && data[4] === data[6] && data[2] !== "null")
-    ) {
-        return true;
-    } else if (
-        (data[3] === data[4] && data[4] === data[5] && data[3] !== "null") ||
-        (data[6] === data[7] && data[7] === data[8] && data[6] !== "null")
-    ) {
-        return true;
-    }
-    return false;
+  if (
+    ((data[0] === data[1] && data[1] === data[2]) ||
+      (data[0] === data[3] && data[3] === data[6]) ||
+      (data[0] === data[4] && data[4] === data[8])) &&
+    data[0] !== "null"
+  ) {
+    return true;
+  } else if (
+    (data[1] === data[4] && data[4] === data[7] && data[1] !== "null") ||
+    (data[2] === data[5] && data[5] === data[8] && data[2] !== "null") ||
+    (data[2] === data[4] && data[4] === data[6] && data[2] !== "null")
+  ) {
+    return true;
+  } else if (
+    (data[3] === data[4] && data[4] === data[5] && data[3] !== "null") ||
+    (data[6] === data[7] && data[7] === data[8] && data[6] !== "null")
+  ) {
+    return true;
+  }
+  return false;
 };
 
 const reset = () => {
-    for (let i = 0; i < 9; i++) {
-        document.getElementById(`${i}`).innerHTML = "";
-        winnerText.innerHTML = "";
-        data[i] = "null";
-    }
-    if (restartButton.className === "btn btn-danger") {
-        restartButton.className = "btn btn-info";
-        restartButton.innerHTML = "Restart";
-    }
-    sign = "X";
+  for (let i = 0; i < 9; i++) {
+    document.getElementById(`${i}`).innerHTML = "";
+    winnerText.innerHTML = "";
+    data[i] = "null";
+  }
+  if (
+    restartButton.className === "btn btn-success" ||
+    restartButton.className === "btn btn-danger"
+  ) {
+    restartButton.className = "btn btn-info";
+    restartButton.innerHTML = "Restart";
+  }
+  sign = "X";
 };
 
 const printSign = (e) => {
-    let idx = e.target.id;
-    //   console.log(idx);
-    if (data[idx] !== "null" || winnerText.innerHTML !== "") {
-        return;
-    }
-    document.getElementById(`${idx}`).innerHTML = sign;
-    data[idx] = sign;
-    // console.log(data);
-    let winnerFlag = checkWinner();
-    if (winnerFlag) {
-        winnerText.innerHTML = `${sign} WON THE GAME`;
-        winnerText.style.display = "flex";
-        return;
-    }
-    sign = swapSign();
-    if (!data.includes("null")) {
-        winnerText.innerHTML = "GAME OVER";
-        winnerText.style.marginLeft = "254px";
-        restartButton.className = "btn btn-danger";
-        restartButton.innerHTML = "Try Again";
-    }
+  let idx = e.target.id;
+  //   console.log(idx);
+  if (data[idx] !== "null" || winnerText.innerHTML !== "") {
+    return;
+  }
+  document.getElementById(`${idx}`).innerHTML = sign;
+  data[idx] = sign;
+  // console.log(data);
+  if (checkWinner()) {
+    winnerText.innerHTML = `${sign} WON THE GAME!`;
+    winnerText.style.marginLeft = "310px";
+    restartButton.className = "btn btn-success";
+    restartButton.innerHTML = "Play Again";
+    return;
+  }
+  sign = swapSign();
+  if (!data.includes("null")) {
+    winnerText.innerHTML = "IT'S A TIE!";
+    winnerText.style.marginLeft = "310px";
+    restartButton.className = "btn btn-danger";
+    restartButton.innerHTML = "Try Again";
+  }
 };
 
 button0.addEventListener("click", printSign);
