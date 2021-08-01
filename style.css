@@ -1,0 +1,50 @@
+*{
+  font-size: 45px;
+}
+.game:hover{
+  background-color: aliceblue;
+}
+
+h6{
+  font-family: cursive;
+}
+.container{
+  padding-top: 10%;
+}
+
+#restart {
+  font-size: 16px;
+}
+#demo{
+  font-size: 28px;
+  padding: 10px;
+  margin-left: 130px;
+  width: 50%;
+}
+/* .board{
+  width: 100vh;
+  height: 80vh;
+  display: grid;
+  justify-content: center;
+  align-content: center;
+} */
+
+/* .result{
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, .9);
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 5rem;
+} */
+
+
+.btn-group > button {
+    width: 150px;
+    height: 150px;
+}
