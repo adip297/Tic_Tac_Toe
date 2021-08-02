@@ -9,6 +9,7 @@ const button7 = document.getElementById("7");
 const button8 = document.getElementById("8");
 const winnerText = document.getElementById("demo");
 const restartButton = document.getElementById("restart");
+const playerTurn = document.getElementById("player");
 let sign = "X";
 const data = [
   "null",
@@ -56,9 +57,10 @@ const checkWinner = () => {
 const reset = () => {
   for (let i = 0; i < 9; i++) {
     document.getElementById(`${i}`).innerHTML = "";
-    winnerText.innerHTML = "";
     data[i] = "null";
   }
+  winnerText.innerHTML = "";
+  playerTurn.innerHTML = "X will play first.";
   if (
     restartButton.className === "btn btn-success" ||
     restartButton.className === "btn btn-danger"
@@ -81,13 +83,16 @@ const printSign = (e) => {
   if (checkWinner()) {
     winnerText.innerHTML = `${sign} WON THE GAME!`;
     winnerText.style.marginLeft = "310px";
+    playerTurn.innerHTML = "";
     restartButton.className = "btn btn-success";
     restartButton.innerHTML = "Play Again";
     return;
   }
   sign = swapSign();
+  playerTurn.innerHTML = `It's ${sign}'s turn.`;
   if (!data.includes("null")) {
     winnerText.innerHTML = "IT'S A TIE!";
+    playerTurn.innerHTML = "";
     winnerText.style.marginLeft = "310px";
     restartButton.className = "btn btn-danger";
     restartButton.innerHTML = "Try Again";
